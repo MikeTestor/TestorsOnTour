@@ -1,0 +1,45 @@
+# Build results
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Visual Studio
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+*.userprefs
+
+# ReSharper
+.idea/
+*.sln.iml
+
+# Local files
+appsettings.Development.json
+appsettings.*.json
+
+# Dependencies
+node_modules/
+packages/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE specific
+.vscode/settings.json
+.vscode/launch.json
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# DB
+*.db-shm
+*.db-wal
