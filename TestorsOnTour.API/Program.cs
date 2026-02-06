@@ -9,6 +9,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<TestorsOnTourDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -16,6 +17,11 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+//app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+                .WithOrigins("http://localhost:3000", "https://localhost:3000"));
 
 app.MapControllers();
 
