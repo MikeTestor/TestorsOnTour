@@ -1,28 +1,42 @@
 import { useEffect, useState } from 'react';
 import './App.css'
+import { List, ListItem, ListItemText, Typography } from '@mui/material';
+import axios from 'axios';
 
-function App() {  
+function App() {
   const name = 'Testors On Tour';
-  const [hikes, setHikes] = useState([]);
+  const [hikes, setHikes] = useState<Hike[]>([]);
+
+  // useEffect(() => {
+  //   fetch('https://localhost:5001/api/hikes')
+  //     .then(response => response.json())
+  //     .then(data => setHikes(data))
+  //     .catch(error => console.error('Error fetching hikes:', error));
+  // }, []);
+
+  // axios.get('https://localhost:5001/api/hikes')
+  //   .then(response => setHikes(response.data))
+  //   .catch(error => console.error('Error fetching hikes:', error));
 
   useEffect(() => {
-    fetch('https://localhost:5001/api/hikes')
-      .then(response => response.json())
-      .then(data => setHikes(data))
+    axios.get<Hike[]>('https://localhost:5001/api/hikes')
+      .then(response => setHikes(response.data))
       .catch(error => console.error('Error fetching hikes:', error));
   }, []);
+  
 
   return (
-    <div>
-      <h3 className='app' style={{color: 'red'}}>{name}</h3>
-      <ul>
+    <>
+      <Typography variant='h3'>{name}</Typography>
+      <List>
         {hikes.map(hike => (
-          <li key={hike.id}>{hike.name}</li>
+          <ListItem>
+            <ListItemText>{hike.name}</ListItemText>
+          </ListItem>
         ))}
-      </ul>
+      </List>
 
-    </div>
-
+    </>
 
   )
 }

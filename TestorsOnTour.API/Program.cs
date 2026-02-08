@@ -19,7 +19,6 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
 app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
                 .WithOrigins("http://localhost:3000", "https://localhost:3000"));
 
