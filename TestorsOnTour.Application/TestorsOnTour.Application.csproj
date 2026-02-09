@@ -11,4 +11,14 @@
     <ProjectReference Include="..\TestorsOnTour.Persistence\TestorsOnTour.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Hikes\" />
+    <Folder Include="Hikes\Commands\" />
+    <Folder Include="Hikes\Queries\" />
+  </ItemGroup>
+
 </Project>
