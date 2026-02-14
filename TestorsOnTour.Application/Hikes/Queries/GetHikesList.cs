@@ -1,6 +1,8 @@
 using System;
 using MediatR;
+using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using TestorsOnTour.Domain;
 using TestorsOnTour.Persistence;
 
@@ -14,9 +16,9 @@ public class GetHikesList
 
     public class Handler (TestorsOnTourDbContext context) : IRequestHandler<Query, List<Hike>>
     {
-        public Task<List<Hike>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<List<Hike>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return context.Hikes.ToListAsync(cancellationToken);
+            return await context.Hikes.ToListAsync(cancellationToken);
         }
     }
 }

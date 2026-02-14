@@ -10,14 +10,17 @@ public class GetHike
 {
     public class Query : IRequest<Hike>
     {
-        public string Id { get; set; }
+        public required string Id { get; set; }
     }
 
     public class Handler(TestorsOnTourDbContext context) : IRequestHandler<Query, Hike?>
     {
-        public Task<Hike?> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Hike?> Handle(Query request, CancellationToken cancellationToken)
         {
-            return context.Hikes.FirstOrDefaultAsync(h => h.Id == request.Id, cancellationToken);
+            // Three ways to get a single item by id using EF Core:
+            // return context.Hikes.FirstOrDefaultAsync(h => h.Id == request.Id, cancellationToken);
+            //return context.Hikes.FindAsync([request.Id], cancellationToken).AsTask();
+            return await context.Hikes.FindAsync([request.Id], cancellationToken);
         }
     }
 }

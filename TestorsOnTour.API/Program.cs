@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using TestorsOnTour.Application.Core;
+using TestorsOnTour.Application.Hikes.Queries;
 using TestorsOnTour.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<TestorsOnTourDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetHikesList.Handler>());
+builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(MappingProfiles).Assembly));
 
 builder.Services.AddCors();
 var app = builder.Build();
